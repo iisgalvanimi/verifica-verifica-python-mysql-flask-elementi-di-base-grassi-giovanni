@@ -84,7 +84,6 @@ def estrai_all_data():
         cursor.close()
         conn.close()
 
-estrai_all_data()
 
 def inserisci_frutto():
     id = input("id frutta: (inserire valore 11 o maggiore)")
@@ -113,7 +112,7 @@ def inserisci_frutto():
         cursor.close()
         conn.close()
 
-inserisci_frutto()
+
 
 def elimina_data():
     item_id = input("Inserisci l'ID della frutta da eliminare: ")
@@ -133,7 +132,7 @@ def elimina_data():
         cursor.close()
         conn.close()
 
-elimina_data()
+
 
 def estrai_per_caratteristica():
     feature = input("Inserisci la caratteristica da cercare (es. calorie): ").lower()
@@ -160,4 +159,29 @@ def estrai_per_caratteristica():
             cursor.close()
             conn.close()
 
-estrai_per_caratteristica()
+
+
+def menu():
+    while True:
+        print("\n- Menu -")
+        print("1. Estrarre tutti i dati")
+        print("2. Inserire un nuovo elemento")
+        print("3. Eliminare un elemento per ID")
+        print("4. Estrarre frutta con una caratteristica (es. calorie)")
+        print("5. Uscire")
+        
+        choice = input("Scegli un'opzione (1-5): ")
+        
+        if choice == '1':
+            estrai_all_data()
+        elif choice == '2':
+            inserisci_frutto()
+        elif choice == '3':
+            elimina_data()
+        elif choice == '4':
+            estrai_per_caratteristica()
+        elif choice == '5':
+            print("Uscita dal programma.")
+            break
+        else:
+            print("Scemunito ri fai")
