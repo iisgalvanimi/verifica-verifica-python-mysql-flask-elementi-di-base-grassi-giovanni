@@ -1,5 +1,5 @@
 import mysql.connector
-
+from Flask import flask
 
 def create_connection():
     try:
@@ -114,3 +114,23 @@ def inserisci_frutto():
         conn.close()
 
 inserisci_frutto()
+
+def elimina_data():
+    item_id = input("Inserisci l'ID della frutta da eliminare: ")
+
+    conn = create_connection()
+    if conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM Frutta WHERE id = %s", (item_id,))
+        result = cursor.fetchone()
+
+        if result:
+            cursor.execute("DELETE FROM Frutta WHERE id = %s", (item_id,))
+            conn.commit()
+            print(f"Elemento con ID {item_id} eliminato.")
+        else:
+            print(f"Errore: Nessun elemento trovato con ID {item_id}.")
+        cursor.close()
+        conn.close()
+
+elimina_data()
