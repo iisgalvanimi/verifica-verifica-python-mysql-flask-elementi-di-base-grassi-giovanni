@@ -185,3 +185,5 @@ def menu():
             break
         else:
             print("Scemunito ri fai")
+
+menu()
