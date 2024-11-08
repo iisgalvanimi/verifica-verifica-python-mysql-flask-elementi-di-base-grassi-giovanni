@@ -85,3 +85,32 @@ def estrai_all_data():
         conn.close()
 
 estrai_all_data()
+
+def inserisci_frutto():
+    id = input("id frutta: (inserire valore 11 o maggiore)")
+    nome = input("Nome della frutta: ")
+    colore = input("Colore della frutta: ")
+    stagione = input("Stagione della frutta: ")
+    vitamina = input("Vitamina principale: ")
+    calorie = input("Calorie della frutta: ")
+
+    # Verifica che le calorie siano un numero
+    try:
+        calorie = int(calorie)
+    except ValueError:
+        print("Errore: Le calorie devono essere un numero intero.")
+        return
+
+    conn = create_connection()
+    if conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO Frutta (id, nome, colore, stagione, vitamina_principale, calorie)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (nome, colore, stagione, vitamina, calorie))
+        conn.commit()
+        print("Nuovo elemento inserito nel database.")
+        cursor.close()
+        conn.close()
+
+inserisci_frutto()
