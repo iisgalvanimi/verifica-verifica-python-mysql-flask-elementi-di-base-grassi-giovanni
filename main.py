@@ -134,3 +134,30 @@ def elimina_data():
         conn.close()
 
 elimina_data()
+
+def estrai_per_caratteristica():
+    feature = input("Inserisci la caratteristica da cercare (es. calorie): ").lower()
+
+    if feature == 'calorie':
+        value = input("Inserisci il limite per le calorie: ")
+
+        if not value.isdigit():
+            print("Errore: Il valore inserito deve essere un numero.")
+            return
+
+        value = int(value)
+
+        conn = create_connection()
+        if conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM Frutta WHERE calorie < %s", (value,))
+            rows = cursor.fetchall()
+            if rows:
+                for row in rows:
+                    print(row)
+            else:
+                print(f"Nessun elemento trovato con calorie inferiori a {value}.")
+            cursor.close()
+            conn.close()
+
+estrai_per_caratteristica()
